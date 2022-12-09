@@ -2,7 +2,7 @@
 
 <template>
   <div class="container">
-    <p class="complete">Setup Complete</p>
+    <p class="setup-complete">Setup Complete</p>
   </div>
 </template>
 
@@ -13,7 +13,7 @@ div.container {
   align-items: center;
   height: 100%;
 
-  p.complete {
+  p.setup-complete {
     color: green;
     font-size: 4rem;
     font-weight: 600;
