@@ -1,4 +1,10 @@
-<script></script>
+<script>
+export default {
+  mounted() {
+    console.log("App mounted");
+  },
+};
+</script>
 
 <template>
   <div class="container">
