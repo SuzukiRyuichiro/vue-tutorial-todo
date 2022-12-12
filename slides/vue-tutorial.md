@@ -58,21 +58,23 @@ Not required, but you can also install these useful tools:
 ```html
 <!-- Component.vue -->
 <template>
-	<!-- HTML structure -->
+  <!-- HTML structure -->
 </template>
 
 <script>
-	// Data & logic
+  // Data & logic
 </script>
 
 <style>
-	/* Styling */
+  /* Styling */
 </style>
 ```
 
 ---
 
 ## Let's think about the app structure
+
+![bg right](./app-structure.jpeg)
 
 ---
 
@@ -86,9 +88,9 @@ Create a new `/components/TasksList.vue`.
 <!-- TasksList.vue -->
 
 <template>
-	<div>
-		<p>This is my first Vue.js component</p>
-	</div>
+  <div>
+    <p>This is my first Vue.js component</p>
+  </div>
 </template>
 ```
 
@@ -99,27 +101,27 @@ Then import the component in your `App.vue` file.
 ```html
 <!-- App.vue -->
 <script>
-	import TaskList from "./components/TaskList.vue"
+  import TaskList from "./components/TaskList.vue";
 
-	export default {
-		components: { TaskList },
-	}
+  export default {
+    components: { TaskList },
+  };
 </script>
 
 <template>
-	<div class="container">
-		<TaskList />
-	</div>
+  <div class="container">
+    <TaskList />
+  </div>
 </template>
 
 <style scoped lang="scss">
-	div.container {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		height: 100%;
-	}
+  div.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
 </style>
 ```
 
@@ -131,17 +133,17 @@ Let's replace the text with a static card:
 <!-- TasksList.vue -->
 
 <template>
-	<div id="tasks">
-		<div class="task-card">
-			<div>
-				<h3>Create a card component</h3>
-				<p>
-					Create a new TaskCard.vue file in the components folder, then import
-					it in TasksList.vue
-				</p>
-			</div>
-		</div>
-	</div>
+  <div>
+    <div class="task-card">
+      <div>
+        <h3>Create a card component</h3>
+        <p>
+          Create a new TaskCard.vue file in the components folder, then import
+          it in TasksList.vue
+        </p>
+      </div>
+    </div>
+  </div>
 </template>
 ```
 
@@ -169,26 +171,26 @@ Let's define some `data` and use the mustaches `{{ }}` to interpolate the values
 <!-- TaskCard.vue -->
 
 <template>
-	<div class="task-card">
-		<div>
-			<h3>{{ title }}</h3>
-			<p>{{ description }}</p>
-		</div>
-		<div>{{ done ? "✅" : "⭕️" }}</div>
-	</div>
+  <div class="task-card">
+    <div>
+      <h3>{{ title }}</h3>
+      <p>{{ description }}</p>
+    </div>
+    <div>{{ done ? "✅" : "⭕️" }}</div>
+  </div>
 </template>
 
 <script>
 export default {
-	data() {
-		return {
-			title: "Make the card component dynamic",
-			description:
-				"Learn about using the data option and passing data to child components using props",
-			done: false,
-		}
-	},
-}
+  data() {
+    return {
+      title: "Make the card component dynamic",
+      description:
+        "Learn about using the data option and passing data to child components using props",
+      done: false,
+    };
+  },
+};
 </script>
 ```
 
@@ -214,12 +216,12 @@ Let's replace the `data` option with `props`:
 // TaskCard.vue <script>
 
 export default {
-	props: {
-		title: String,
-		description: String,
-		done: { type: Boolean, default: false },
-	},
-}
+  props: {
+    title: String,
+    description: String,
+    done: { type: Boolean, default: false },
+  },
+};
 ```
 
 ---
@@ -230,9 +232,9 @@ We can now pass the `title` and `description` from the parent component:
 <!-- TasksList.vue <template> -->
 
 <TaskCard
-	title="Make the card component dynamic"
-	description="Learn about using the data option and passing data to child components using props"
-	done="true"
+  title="Make the card component dynamic"
+  description="Learn about using the data option and passing data to child components using props"
+  done="true"
 />
 ```
 
@@ -283,9 +285,9 @@ Instead, use a `v-bind` directive (shorthand `:`).
 <!-- TasksList.vue <template> -->
 
 <TaskCard
-	v-bind:title="tasks[0].title"
-	v-bind:description="tasks[0].description"
-	v-bind:done="tasks[0].done"
+  v-bind:title="tasks[0].title"
+  v-bind:description="tasks[0].description"
+  v-bind:done="tasks[0].done"
 />
 ```
 
@@ -311,11 +313,11 @@ Let's now display all of our tasks by iterating over the `tasks` array using the
 <!-- TasksList.vue <template> -->
 
 <TaskCard
-	v-for="(task, index) in tasks"
-	:key="index"
-	:title="task.title"
-	:description="task.description"
-	:done="task.done"
+  v-for="(task, index) in tasks"
+  :key="index"
+  :title="task.title"
+  :description="task.description"
+  :done="task.done"
 />
 ```
 
@@ -329,7 +331,7 @@ Let's display a small message when we have no tasks in our app.
 <!-- TasksList.vue <template> -->
 
 <div v-if="tasks.length > 0" class="tasks-list">
-	<TaskCard ... />
+  <TaskCard ... />
 </div>
 <p v-else>You don't have any tasks yet...</p>
 ```
@@ -362,10 +364,10 @@ Let's add a button to test that our method works and make it listen to `click` e
 <!-- TasksList.vue <template> -->
 
 <button
-	class="btn round-icon"
-	v-on:click="addTask('My new task', 'My new description')"
+  class="btn round-icon"
+  v-on:click="addTask('My new task', 'My new description')"
 >
-	＋
+  ＋
 </button>
 ```
 
@@ -379,10 +381,10 @@ We still need to be able to enter the `title` and `description` ourselves. Let's
 <!-- TasksList.vue <template> -->
 
 <div class="task-card new-task">
-	<div>
-		<input type="text" placeholder="What would you like to do?" />
-		<textarea placeholder="Add some details about your task..."></textarea>
-	</div>
+  <div>
+    <input type="text" placeholder="What would you like to do?" />
+    <textarea placeholder="Add some details about your task..."></textarea>
+  </div>
 </div>
 ```
 
@@ -402,29 +404,29 @@ We can bind the input fields with data attributes in our component.
 <!-- TasksList.vue -->
 
 <template>
-	<!-- ... -->
-	<input
-		type="text"
-		placeholder="What would you like to do?"
-		v-model="newTitle"
-	/>
-	<textarea
-		placeholder="Add some details about your task..."
-		v-model="newDescription"
-	></textarea>
-	<!-- ... -->
+  <!-- ... -->
+  <input
+    type="text"
+    placeholder="What would you like to do?"
+    v-model="newTitle"
+  />
+  <textarea
+    placeholder="Add some details about your task..."
+    v-model="newDescription"
+  ></textarea>
+  <!-- ... -->
 </template>
 
 <script>
 export default {
-	data() {
-		return {
-			tasks: [],
-			newTitle: "",
-			newDescription: "",
-		}
-	},
-}
+  data() {
+    return {
+      tasks: [],
+      newTitle: "",
+      newDescription: "",
+    };
+  },
+};
 </script>
 ```
 
@@ -436,14 +438,14 @@ export default {
 <!-- TasksList.vue -->
 
 <template>
-	<!-- ... -->
-	<button
-		class="btn round-icon"
-		@click="addTask(newTitle, newDescription), resetForm()"
-	>
-		＋
-	</button>
-	<!-- ... -->
+  <!-- ... -->
+  <button
+    class="btn round-icon"
+    @click="addTask(newTitle, newDescription), resetForm()"
+  >
+    ＋
+  </button>
+  <!-- ... -->
 </template>
 
 <script>
@@ -543,22 +545,22 @@ Let's move the input fields and style from `TasksList` to a new component `NewTa
 <!-- NewTask.vue -->
 
 <template>
-	<div
-		class="task-card new-task"
-		@keyup.enter="submitTask(newTitle, newDescription), resetForm()"
-	>
-		<div>
-			<input
-				type="text"
-				placeholder="What would you like to do?"
-				v-model="newTitle"
-			/>
-			<textarea
-				placeholder="Add some details about your task..."
-				v-model="newDescription"
-			></textarea>
-		</div>
-	</div>
+  <div
+    class="task-card new-task"
+    @keyup.enter="submitTask(newTitle, newDescription), resetForm()"
+  >
+    <div>
+      <input
+        type="text"
+        placeholder="What would you like to do?"
+        v-model="newTitle"
+      />
+      <textarea
+        placeholder="Add some details about your task..."
+        v-model="newDescription"
+      ></textarea>
+    </div>
+  </div>
 </template>
 ```
 
@@ -639,30 +641,30 @@ Modify your `TaskCard` component to use the `Checkbox` and emit a custom event o
 <!-- TaskCard.vue -->
 
 <template>
-	<div :class="['task-card', { done }]">
-		<div>
-			<h3>{{ title }}</h3>
-			<p>{{ description }}</p>
-		</div>
-		<Checkbox @click.native="$emit('toggle-task', taskIndex)" :checked="done" />
-	</div>
+  <div :class="['task-card', { done }]">
+    <div>
+      <h3>{{ title }}</h3>
+      <p>{{ description }}</p>
+    </div>
+    <Checkbox @click.native="$emit('toggle-task', taskIndex)" :checked="done" />
+  </div>
 </template>
 
 <script>
-import Checkbox from "./Checkbox"
+import Checkbox from "./Checkbox";
 
 export default {
-	components: {
-		Checkbox,
-	},
+  components: {
+    Checkbox,
+  },
 
-	props: {
-		title: String,
-		description: String,
-		done: Boolean,
-		taskIndex: Number,
-	},
-}
+  props: {
+    title: String,
+    description: String,
+    done: Boolean,
+    taskIndex: Number,
+  },
+};
 </script>
 ```
 
