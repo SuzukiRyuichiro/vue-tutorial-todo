@@ -1,28 +1,23 @@
 <script>
+import TaskList from "./components/TaskList.vue";
+
 export default {
-  mounted() {
-    console.log("App mounted");
-  },
+  components: { TaskList },
 };
 </script>
 
 <template>
   <div class="container">
-    <p class="setup-complete">Setup Complete</p>
+    <TaskList />
   </div>
 </template>
 
 <style scoped lang="scss">
 div.container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100%;
-
-  p.setup-complete {
-    color: green;
-    font-size: 4rem;
-    font-weight: 600;
-  }
 }
 </style>
