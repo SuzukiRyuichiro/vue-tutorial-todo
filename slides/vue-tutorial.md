@@ -109,13 +109,13 @@ Then import the component in your `App.vue` file.
 </script>
 
 <template>
-  <div class="container">
+  <div class="frame">
     <TaskList />
   </div>
 </template>
 
 <style scoped lang="scss">
-  div.container {
+  div.frame {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -133,27 +133,71 @@ Let's replace the text with a static card:
 <!-- TasksList.vue -->
 
 <template>
-  <div>
-    <div class="task-card">
-      <div>
-        <h3>Create a card component</h3>
-        <p>
-          Create a new TaskCard.vue file in the components folder, then import
-          it in TasksList.vue
-        </p>
+  <div class="container">
+    <h1>Task List</h1>
+    <div class="list-group">
+      <div class="list-group-item d-flex align-items-center">
+        <div class="flex-grow-1">
+          <p class="fs-3">Task 1</p>
+          <p>Details of task 1</p>
+        </div>
+        <input type="checkbox" class="form-check-input flex-shrink-0" />
+      </div>
+      <div class="list-group-item d-flex align-items-center">
+        <div class="flex-grow-1">
+          <p class="fs-3">Task 2</p>
+          <p>Details of task 2</p>
+        </div>
+        <input type="checkbox" class="form-check-input flex-shrink-0" />
       </div>
     </div>
   </div>
 </template>
 ```
 
+We can see that the `div` for the task is repeated twice. We can refactor that into a separate component.
+
 ---
 
-### Styling components
+## Creating a TaskCard component
 
-You can add styling rules for each component in the `<style>` section. Try it out!
+```html
+<!-- TaskCard.vue -->
+<template>
+  <div class="list-group-item d-flex align-items-center">
+    <div class="flex-grow-1">
+      <p class="fs-3">Task</p>
+      <p>Details of task</p>
+    </div>
+    <input type="checkbox" class="form-check-input flex-shrink-0" />
+  </div>
+</template>
+```
 
-You can use this styling I prepared for the card, but we should first move the task card into its own component. Move the previous code into a `TaskCard.vue` and add this styling:
+---
+
+## Using the TaskCard component
+
+```html
+<!-- TaskList.vue -->
+<script>
+  import TaskCard from "./TaskCard.vue";
+
+  export default {
+    components: { TaskCard },
+  };
+</script>
+
+<template>
+  <div class="container">
+    <h1>Task List</h1>
+    <div class="list-group">
+      <TaskCard />
+      <TaskCard />
+    </div>
+  </div>
+</template>
+```
 
 ---
 
@@ -167,32 +211,42 @@ Let's define some `data` and use the mustaches `{{ }}` to interpolate the values
 
 ---
 
-```vue
+```html
 <!-- TaskCard.vue -->
-
 <template>
-  <div class="task-card">
-    <div>
-      <h3>{{ title }}</h3>
-      <p>{{ description }}</p>
+  <div class="list-group-item d-flex align-items-center">
+    <div class="flex-grow-1">
+      <p class="fs-3">{{ title }}</p>
+      <p>{{ details }}</p>
     </div>
-    <div>{{ done ? "✅" : "⭕️" }}</div>
+    <input
+      type="checkbox"
+      class="form-check-input flex-shrink-0"
+      v-bind:checked="done"
+    />
   </div>
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      title: "Make the card component dynamic",
-      description:
-        "Learn about using the data option and passing data to child components using props",
-      done: false,
-    };
-  },
-};
+  export default {
+    data() {
+      return {
+        title: "Do the dishes",
+        details: "Wash the dishes and dry them",
+        done: true,
+      };
+    },
+  };
 </script>
 ```
+
+---
+
+## Key takeaways
+
+- Use `data` to assign variables we can use inside the template
+- Use `{{ }}` to interpolate the variables inside the template
+- Use `v-bind` to make html attributes dynamic. Can be replaced with just `:`
 
 ---
 

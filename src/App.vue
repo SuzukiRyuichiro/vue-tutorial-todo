@@ -7,13 +7,13 @@ export default {
 </script>
 
 <template>
-  <div class="container">
+  <div class="frame">
     <TaskList />
   </div>
 </template>
 
 <style scoped lang="scss">
-div.container {
+div.frame {
   display: flex;
   flex-direction: column;
   justify-content: center;
