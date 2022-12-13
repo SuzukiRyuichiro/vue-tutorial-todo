@@ -11,6 +11,7 @@
       type="checkbox"
       class="form-check-input flex-shrink-0"
       v-bind:checked="done"
+      @change="$emit('toggleDone')"
     />
   </div>
 </template>

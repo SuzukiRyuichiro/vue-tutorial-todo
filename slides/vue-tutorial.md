@@ -419,10 +419,10 @@ Let's add a button to test that our method works and make it listen to `click` e
 <!-- TasksList.vue <template> -->
 
 <button
-  class="btn round-icon"
+  class="btn btn-outline-primary"
   v-on:click="addTask('My new task', 'My new description')"
 >
-  ＋
+  Add
 </button>
 ```
 
@@ -434,13 +434,17 @@ We still need to be able to enter the `title` and `description` ourselves. Let's
 
 ```html
 <!-- TasksList.vue <template> -->
-
-<div class="task-card new-task">
-  <div>
-    <input type="text" placeholder="What would you like to do?" />
-    <textarea placeholder="Add some details about your task..."></textarea>
+<form :class="{ 'd-none': showForm }">
+  <div class="mb-3">
+    <label for="title" class="form-label">Title</label>
+    <input class="form-control" id="title" placeholder="Enter a title" />
   </div>
-</div>
+  <div class="mb-3">
+    <label for="description" class="form-label">Description</label>
+    <textarea class="form-control" id="description" rows="3"></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary mb-3">Add task</button>
+</form>
 ```
 
 ---
