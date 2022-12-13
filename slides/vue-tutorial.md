@@ -139,14 +139,14 @@ Let's replace the text with a static card:
       <div class="list-group-item d-flex align-items-center">
         <div class="flex-grow-1">
           <p class="fs-3">Task 1</p>
-          <p>Details of task 1</p>
+          <p>Description of task 1</p>
         </div>
         <input type="checkbox" class="form-check-input flex-shrink-0" />
       </div>
       <div class="list-group-item d-flex align-items-center">
         <div class="flex-grow-1">
           <p class="fs-3">Task 2</p>
-          <p>Details of task 2</p>
+          <p>Description of task 2</p>
         </div>
         <input type="checkbox" class="form-check-input flex-shrink-0" />
       </div>
@@ -167,7 +167,7 @@ We can see that the `div` for the task is repeated twice. We can refactor that i
   <div class="list-group-item d-flex align-items-center">
     <div class="flex-grow-1">
       <p class="fs-3">Task</p>
-      <p>Details of task</p>
+      <p>Description of task</p>
     </div>
     <input type="checkbox" class="form-check-input flex-shrink-0" />
   </div>
@@ -232,7 +232,7 @@ Let's define some `data` and use the mustaches `{{ }}` to interpolate the values
     data() {
       return {
         title: "Do the dishes",
-        details: "Wash the dishes and dry them",
+        description: "Wash the dishes and dry them",
         done: true,
       };
     },
@@ -347,18 +347,6 @@ Instead, use a `v-bind` directive (shorthand `:`).
 
 ---
 
-### Binding HTML Classes
-
-We can bind the class attribute to add a `done` class to the card when the task is completed.
-
-```html
-<!-- TaskCard.vue <template> -->
-
-<div :class="['task-card', { done }]"></div>
-```
-
----
-
 ### Iterate with `v-for`
 
 Let's now display all of our tasks by iterating over the `tasks` array using the `v-for` directive.
@@ -377,6 +365,19 @@ Let's now display all of our tasks by iterating over the `tasks` array using the
 
 ---
 
+### Binding HTML Classes
+
+We can bind the class attribute to add a `done` class to the card when the task is completed.
+
+```html
+<!-- TaskCard.vue <template> -->
+
+<!-- <div :class="{ "class-to-apply": condition }"></div> -->
+<div :class="{ done: done }"></div>
+```
+
+---
+
 ### Conditional Rendering with `v-if` / `v-else`
 
 Let's display a small message when we have no tasks in our app.
@@ -384,7 +385,7 @@ Let's display a small message when we have no tasks in our app.
 ```html
 <!-- TasksList.vue <template> -->
 
-<div v-if="tasks.length > 0" class="tasks-list">
+<div v-if="tasks.length > 0" class="list-group">
   <TaskCard ... />
 </div>
 <p v-else>You don't have any tasks yet...</p>
