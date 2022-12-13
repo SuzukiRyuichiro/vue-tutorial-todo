@@ -46,7 +46,7 @@ export default {
 <template>
   <div class="container">
     <div class="d-flex gap-3">
-      <h1>Task List</h1>
+      <h1>📝 Task List</h1>
       <span
         :class="{
           'add-button': true,

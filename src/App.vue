@@ -18,6 +18,8 @@ div.frame {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 36px;
+  padding: 36px 0px;
+  max-width: 760px;
+  margin: 0 auto;
 }
 </style>
