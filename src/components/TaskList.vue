@@ -27,13 +27,26 @@ export default {
       ],
     };
   },
+  methods: {
+    addTask(title, description, done = false) {
+      this.tasks.unshift({ title, description, done });
+    },
+  },
 };
 </script>
 
 <template>
   <div class="container">
-    <h1>Task List</h1>
-    <div v-if="tasks.length > 0" class="list-group">
+    <div class="d-flex gap-3">
+      <h1>Task List</h1>
+      <button
+        class="btn btn-outline-primary"
+        v-on:click="addTask('My new task', 'My new description')"
+      >
+        Add
+      </button>
+    </div>
+    <div v-if="tasks.length > 0" class="list-group mt-2">
       <TaskCard
         v-for="(task, index) in tasks"
         :key="index"
@@ -42,7 +55,7 @@ export default {
         :done="task.done"
       />
     </div>
-    <p v-else>You don't have any tasks yet</p>
+    <p v-else class="mt-2">You don't have any tasks yet</p>
   </div>
 </template>
 
